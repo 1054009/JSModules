@@ -7,8 +7,7 @@ class Helper__EventCallbackData
 {
 	constructor(listener, eventName, permanent = false, callback)
 	{
-		const helper = new Helper()
-		this.m_Helper = helper
+		const helper = Helper.assignToObject(this)
 
 		if (!listener || !helper.isFunction(listener.addEventListener))
 		throw new Error(`Invalid listener '${listener}' given to 'Helper__EventCallbackData'`)
@@ -64,6 +63,25 @@ export class Helper
 	constructor()
 	{
 
+	}
+
+	/*
+	*	Assigns a new helper object to another object
+	*/
+	static assignToObject(object)
+	{
+		if (!(object instanceof Object)) return null
+
+		const helper = new Helper()
+		object.m_Helper = helper
+
+		object.getHelper = function()
+		{
+			return this.m_Helper
+		}
+		object.getHelper.bind(object)
+
+		return helper
 	}
 
 	/**
