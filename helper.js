@@ -86,7 +86,7 @@ export class Helper
 
 	/**
  	*	Returns true if a value is a string, false otherwise
- 	*	@param {any} variable - The value to test
+ 	*	@param {any} variable The value to test
 	*	@returns {boolean}
  	*/
 	isString(variable)
@@ -96,8 +96,8 @@ export class Helper
 
 	/**
  	*	Returns true if a value is a number, false otherwise
- 	*	@param {any} variable - The value to test
-	*	@param {boolean} [noBoundsCheck=false] - Whether or not to compare max and min safe integer
+ 	*	@param {any} variable The value to test
+	*	@param {boolean} [noBoundsCheck=false] Whether or not to compare max and min safe integer
 	*	@returns {boolean}
  	*/
 	isNumber(variable, noBoundsCheck = false)
@@ -116,7 +116,7 @@ export class Helper
 
 	/**
  	*	Returns true if a value is a boolean, false otherwise
- 	*	@param {any} variable - The value to test
+ 	*	@param {any} variable The value to test
 	*	@returns {boolean}
  	*/
 	isBoolean(variable)
@@ -128,7 +128,7 @@ export class Helper
 
 	/**
  	*	Returns true if a value is an Array, false otherwise
- 	*	@param {any} variable - The value to test
+ 	*	@param {any} variable The value to test
 	*	@returns {boolean}
  	*/
 	isArray(variable)
@@ -138,7 +138,7 @@ export class Helper
 
 	/**
  	*	Returns true if a value is a Map, false otherwise
- 	*	@param {any} variable - The value to test
+ 	*	@param {any} variable The value to test
 	*	@returns {boolean}
  	*/
 	isMap(variable)
@@ -148,7 +148,7 @@ export class Helper
 
 	/**
  	*	Returns true if a value is a Function, false otherwise
- 	*	@param {any} variable - The value to test
+ 	*	@param {any} variable The value to test
 	*	@returns {boolean}
  	*/
 	isFunction(variable)
@@ -158,8 +158,8 @@ export class Helper
 
 	/**
  	*	Safely access a string data type
- 	*	@param {any} variable - The value to get as a string
-	*	@param {string} [fallback=""] - The value that will be returned if converson fails
+ 	*	@param {any} variable The value to get as a string
+	*	@param {string} [fallback=""] The value that will be returned if converson fails
 	*	@returns {string}
  	*/
 	getString(variable, fallback = "")
@@ -177,10 +177,10 @@ export class Helper
 
 	/**
  	*	Safely access a number data type
- 	*	@param {any} variable - The value to get as a number
-	*	@param {boolean} [isFloat=false] - Whether or not the value should be treated as a float
-	*	@param {number} [fallback=0] - The value that will be returned if converson fails
-	*	@param {boolean} [noBoundsCheck=false] - Whether or not to compare max and min safe integer
+ 	*	@param {any} variable The value to get as a number
+	*	@param {boolean} [isFloat=false] Whether or not the value should be treated as a float
+	*	@param {number} [fallback=0] The value that will be returned if converson fails
+	*	@param {boolean} [noBoundsCheck=false] Whether or not to compare max and min safe integer
 	*	@returns {number}
  	*/
 	getNumber(variable, isFloat = false, fallback = 0, noBoundsCheck = false)
@@ -200,10 +200,10 @@ export class Helper
 
 	/**
  	*	Safely access an unsigned number data type
- 	*	@param {any} variable - The value to get as a number
-	*	@param {boolean} [isFloat=false] - Whether or not the value should be treated as a float
-	*	@param {number} [fallback=0] - The value that will be returned if converson fails
-	*	@param {boolean} [noBoundsCheck=false] - Whether or not to compare max and min safe integer
+ 	*	@param {any} variable The value to get as a number
+	*	@param {boolean} [isFloat=false] Whether or not the value should be treated as a float
+	*	@param {number} [fallback=0] The value that will be returned if converson fails
+	*	@param {boolean} [noBoundsCheck=false] Whether or not to compare max and min safe integer
 	*	@returns {number}
  	*/
 	getUnsignedNumber(variable, isFloat = false, fallback = 0, noBoundsCheck = false)
@@ -223,9 +223,9 @@ export class Helper
 
 	/**
  	*	Safely access a boolean data type
- 	*	@param {any} variable - The value to get as a boolean
-	*	@param {boolean} [allowRegex=true] - Whether or not to use regex on strings
-	*	@param {boolean} [fallback=false] - The value that will be returned if converson fails
+ 	*	@param {any} variable The value to get as a boolean
+	*	@param {boolean} [allowRegex=true] Whether or not to use regex on strings
+	*	@param {boolean} [fallback=false] The value that will be returned if converson fails
 	*	@returns {boolean}
  	*/
 	getBoolean(variable, allowRegex = true, fallback = false)
@@ -247,9 +247,9 @@ export class Helper
 
 	/**
  	*	Clamp a number between minimum and maximum values
- 	*	@param {number} number - The value to clamp
-	*	@param {number} [min=Number.MIN_SAFE_INTEGER] - The minimum allowed value
-	*	@param {number} [max=Number.MAX_SAFE_INTEGER] - The maximum allowed value
+ 	*	@param {number} number The value to clamp
+	*	@param {number} [min=Number.MIN_SAFE_INTEGER] The minimum allowed value
+	*	@param {number} [max=Number.MAX_SAFE_INTEGER] The maximum allowed value
 	*	@returns {number}
  	*/
 	clamp(number, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER)
@@ -265,9 +265,9 @@ export class Helper
 
 	/**
  	*	INclusive random number generator
-	*	@param {number} [min=Number.MIN_SAFE_INTEGER] - The minimum allowed value
-	*	@param {number} [max=Number.MAX_SAFE_INTEGER] - The maximum allowed value
-	*	@param {boolean} [allowFloat=false] - Whether or not float values should be allowed
+	*	@param {number} [min=Number.MIN_SAFE_INTEGER] The minimum allowed value
+	*	@param {number} [max=Number.MAX_SAFE_INTEGER] The maximum allowed value
+	*	@param {boolean} [allowFloat=false] Whether or not float values should be allowed
 	*	@returns {number}
  	*/
 	rng(min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER, allowFloat = false)
@@ -282,7 +282,7 @@ export class Helper
 
 	/**
  	*	Generates a random string with the given length
-	*	@param {number} [length=12] - The length of the random string. Unsigned.
+	*	@param {number} [length=12] The length of the random string. Unsigned.
 	*	@returns {string}
  	*/
 	randomString(length = 12)
@@ -300,8 +300,8 @@ export class Helper
 
 	/**
  	*	Filters an array in place
-	*	@param {Array} target - The array to be filtered
-	*	@param {Function} callback - The filter callback
+	*	@param {Array} target The array to be filtered
+	*	@param {Function} callback The filter callback
  	*/
 	filterArray(target, callback)
 	{
@@ -314,7 +314,7 @@ export class Helper
 
 	/**
  	*	Deep copies an array
-	*	@param {Array} target - The array to be copied
+	*	@param {Array} target The array to be copied
 	*	@returns {Array}
  	*/
 	copyArray(target, lookup)
@@ -348,7 +348,7 @@ export class Helper
 
 	/**
  	*	Deep copies an Object
-	*	@param {Object} target - The Object to be copied
+	*	@param {Object} target The Object to be copied
 	*	@returns {Object}
  	*/
 	copyObject(target, lookup)
@@ -383,8 +383,8 @@ export class Helper
 
 	/**
  	*	Returns true if two Arrays contain the same data
-	*	@param {Array} first - The first Array to be compared
-	*	@param {Array} second - The second Array to be compared
+	*	@param {Array} first The first Array to be compared
+	*	@param {Array} second The second Array to be compared
 	*	@returns {boolean}
  	*/
 	compareArrays(first, second)
@@ -405,8 +405,8 @@ export class Helper
 
 	/**
  	*	Returns true if two Objects contain the same data
-	*	@param {Object} first - The first Object to be compared
-	*	@param {Object} second - The second Object to be compared
+	*	@param {Object} first The first Object to be compared
+	*	@param {Object} second The second Object to be compared
 	*	@returns {boolean}
  	*/
 	compareObjects(first, second)
@@ -434,8 +434,8 @@ export class Helper
 
 	/**
  	*	Returns true if two data types contain the same information
-	*	@param {Object} first - The first Object to be compared
-	*	@param {Object} second - The second Object to be compared
+	*	@param {Object} first The first Object to be compared
+	*	@param {Object} second The second Object to be compared
 	*	@returns {boolean}
  	*/
 	smartCompare(first, second)
@@ -475,7 +475,7 @@ export class Helper
 
 	/**
  	*	Returns true if the window is on the provided page
-	*	@param {string} pageName - The name of the page to check for
+	*	@param {string} pageName The name of the page to check for
 	*	@returns {boolean}
  	*/
 	isOnPage(pageName)
@@ -489,7 +489,7 @@ export class Helper
 
 	/**
  	*	Returns a URLSearchParams object for the current page's search parameters
-	*	@param {string} [url=null] - If provided, this URL will be checked instead of the currenet window location
+	*	@param {string} [url=null] If provided, this URL will be checked instead of the currenet window location
 	*	@returns {URLSearchParams}
  	*/
 	getSearchParameters(url = null)
@@ -552,10 +552,10 @@ export class Helper
 
 	/**
  	*	Adds an event to the listener
-	*	@param {Object} listener - The object 'addEventListener' will be called on
-	*	@param {string} eventName - The event name that will be passed to 'addEventListener'
-	*	@param {boolean} [permanent=false] - If false, the event will be removed after it runs
-	*	@param {Function} callback - The function that will be ran when the event is fired
+	*	@param {Object} listener The object 'addEventListener' will be called on
+	*	@param {string} eventName The event name that will be passed to 'addEventListener'
+	*	@param {boolean} [permanent=false] If false, the event will be removed after it runs
+	*	@param {Function} callback The function that will be ran when the event is fired
  	*/
 	hookEvent(listener, eventName, permanent = false, callback)
 	{

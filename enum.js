@@ -33,7 +33,7 @@ export class Enum
 
 	/**
  	*	Returns the string equivalent of an enum's value
- 	*	@param {number} value - The value to translate
+ 	*	@param {number} value The value to translate
 	*	@returns {string}
  	*/
 	translateValue(value)

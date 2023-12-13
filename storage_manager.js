@@ -46,8 +46,8 @@ export class StorageManager
 
 	/**
  	*	Returns the string value stored at the given key
- 	*	@param {string} key - The key to lookup in storage
-	*	@param {string} [fallback=""] - The fallback if the key isn't found
+ 	*	@param {string} key The key to lookup in storage
+	*	@param {string} [fallback=""] The fallback if the key isn't found
 	*	@returns {string}
  	*/
 	getStoredString(key, fallback = "")
@@ -57,8 +57,8 @@ export class StorageManager
 
 	/**
  	*	Returns the number value stored at the given key
- 	*	@param {string} key - The key to lookup in storage
-	*	@param {number} [fallback=0] - The fallback if the key isn't found
+ 	*	@param {string} key The key to lookup in storage
+	*	@param {number} [fallback=0] The fallback if the key isn't found
 	*	@returns {number}
  	*/
 	getStoredNumber(key, fallback = 0)
@@ -68,8 +68,8 @@ export class StorageManager
 
 	/**
  	*	Returns the boolean value stored at the given key
- 	*	@param {string} key - The key to lookup in storage
-	*	@param {boolean} [fallback=false] - The fallback if the key isn't found
+ 	*	@param {string} key The key to lookup in storage
+	*	@param {boolean} [fallback=false] The fallback if the key isn't found
 	*	@returns {boolean}
  	*/
 	getStoredBoolean(key, fallback = false)
@@ -83,8 +83,8 @@ export class StorageManager
 
 	/**
  	*	Stores the given value as a string at the given key
- 	*	@param {string} key - The key for the value to be stored at
-	*	@param {any} value - The value to be stored. Will be converted to a string if needed
+ 	*	@param {string} key The key for the value to be stored at
+	*	@param {any} value The value to be stored. Will be converted to a string if needed
  	*/
 	setStoredValue(key, value)
 	{
@@ -99,7 +99,7 @@ export class StorageManager
 
 	/**
  	*	Removes the given key from storage if present
- 	*	@param {string} key - The key for the value to be stored at
+ 	*	@param {string} key The key for the value to be stored at
  	*/
 	removeStoredValue(key)
 	{
