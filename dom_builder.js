@@ -89,6 +89,8 @@ export class DOMBuilder
 		this.setIsActive(true)
 
 		this.m_BaseElement = parentElement
+
+		return parentElement
 	}
 
 	/**
@@ -126,6 +128,8 @@ export class DOMBuilder
 		parent.appendChild(newElement)
 
 		this.getStack().push(newElement)
+
+		return newElement
 	}
 
 	/**
@@ -136,7 +140,6 @@ export class DOMBuilder
 	setAttribute(attribute, value)
 	{
 		const helper = this.getHelper()
-
 		const element = this.getStack().getLastElement()
 
 		attribute = helper.getString(attribute)
@@ -156,11 +159,52 @@ export class DOMBuilder
 
 		const helper = this.getHelper()
 
-		const element = this.getStack().getLastElement()
-
 		const properties = Object.getOwnPropertyNames(attributes)
 		for (const property of properties)
 			this.setAttribute(helper.getString(property), helper.getString(attributes[property]))
+	}
+
+	/**
+ 	*	Adds a class to an element
+	*	@param {string} className The name of the class
+ 	*/
+	addClass(className)
+	{
+		const helper = this.getHelper()
+		const element = this.getStack().getLastElement()
+
+		className = helper.getString(className)
+
+		element.classList.add(className)
+	}
+
+	/**
+ 	*	Adds classes to an element
+	*	@param {Object} classes The class object
+ 	*/
+	addClasses(classes)
+	{
+		const helper = this.getHelper()
+
+		if (!helper.isArray(classes))
+			throw new Error(`Invalid classes ${classes} given to 'addClasses'`)
+
+		for (const className of classes)
+			this.addClass(helper.getString(className))
+	}
+
+	/**
+ 	*	Sets the id on an element
+	*	@param {string} id The id to set
+ 	*/
+	setID(id)
+	{
+		const helper = this.getHelper()
+		const element = this.getStack().getLastElement()
+
+		id = helper.getString(id)
+
+		element.id = id
 	}
 
 	/**
