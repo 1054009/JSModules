@@ -65,9 +65,11 @@ export class Helper
 
 	}
 
-	/*
-	*	Assigns a new helper object to another object
-	*/
+	/**
+ 	*	Assigns a new helper object to another object
+ 	*	@param {Object} object The object to assing the helper to
+	*	@returns {Helper} The created helper
+ 	*/
 	static assignToObject(object)
 	{
 		if (!(object instanceof Object)) return null
