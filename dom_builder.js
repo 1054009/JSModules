@@ -112,6 +112,26 @@ export class DOMBuilder
 	}
 
 	/**
+ 	*	Pushes an element onto the stack and sets the parent
+	*	@param {Element} element The element to push
+ 	*/
+	push(element)
+	{
+		const parent = this.getStack().getLastElement()
+		parent.appendChild(element)
+
+		this.getStack().push(element)
+	}
+
+	/**
+	*	Pops the last element on the stack
+	*/
+	pop()
+	{
+		this.getStack().pop()
+	}
+
+	/**
  	*	Starts a new element
 	*	@param {string} type The type of element
  	*/
@@ -124,10 +144,7 @@ export class DOMBuilder
 		if (!newElement)
 			throw new Error(`Failed to create element of type ${type}`)
 
-		const parent = this.getStack().getLastElement()
-		parent.appendChild(newElement)
-
-		this.getStack().push(newElement)
+		this.push(newElement)
 
 		return newElement
 	}
@@ -157,11 +174,9 @@ export class DOMBuilder
 		if (!(attributes instanceof Object))
 			throw new Error(`Invalid attributes ${attributes} given to 'setAttributes'`)
 
-		const helper = this.getHelper()
-
 		const properties = Object.getOwnPropertyNames(attributes)
 		for (const property of properties)
-			this.setAttribute(helper.getString(property), helper.getString(attributes[property]))
+			this.setAttribute(property, attributes[property])
 	}
 
 	/**
@@ -170,27 +185,21 @@ export class DOMBuilder
  	*/
 	addClass(className)
 	{
-		const helper = this.getHelper()
 		const element = this.getStack().getLastElement()
-
-		className = helper.getString(className)
-
-		element.classList.add(className)
+		element.classList.add(this.getHelper().getString(className))
 	}
 
 	/**
  	*	Adds classes to an element
-	*	@param {Object} classes The class object
+	*	@param {Array} classes The class array
  	*/
 	addClasses(classes)
 	{
-		const helper = this.getHelper()
-
 		if (!helper.isArray(classes))
 			throw new Error(`Invalid classes ${classes} given to 'addClasses'`)
 
 		for (const className of classes)
-			this.addClass(helper.getString(className))
+			this.addClass(className)
 	}
 
 	/**
@@ -199,13 +208,37 @@ export class DOMBuilder
  	*/
 	setID(id)
 	{
-		const helper = this.getHelper()
 		const element = this.getStack().getLastElement()
-
-		id = helper.getString(id)
-
-		element.id = id
+		element.id = this.getHelper().getString(id)
 	}
+
+	/**
+	*	Sets the given property to the given value
+	*	@param {string} property The property to set
+	*	@param {any} value The value to set the property to
+	*/
+	setProperty(property, value)
+	{
+		property = this.getHelper().getString(property)
+
+		const element = this.getStack().getLastElement()
+		element[property] = value
+	}
+
+	/**
+ 	*	Sets properties on an element
+	*	@param {Object} properties The properties object
+ 	*/
+	setProperties(properties)
+	{
+		if (!(properties instanceof Object))
+			throw new Error(`Invalid properties ${properties} given to 'setProperties'`)
+
+		const propertyProperties = Object.getOwnPropertyNames(properties) // Awesome variable name
+		for (const property of propertyProperties)
+			this.setProperty(property, properties[property])
+	}
+
 
 	/**
  	*	Ends the current element
@@ -215,7 +248,7 @@ export class DOMBuilder
 		if (!this.getIsActive())
 			throw new Error("Attempted to use builder when inactive")
 
-		this.getStack().pop()
+		this.pop()
 	}
 
 	/*
