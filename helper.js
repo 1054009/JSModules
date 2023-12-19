@@ -266,6 +266,24 @@ export class Helper
 	}
 
 	/**
+ 	*	Clamp a number between minimum and maximum values with rollover
+ 	*	@param {number} number The value to clamp
+	*	@param {number} [min=Number.MIN_SAFE_INTEGER] The minimum allowed value
+	*	@param {number} [max=Number.MAX_SAFE_INTEGER] The maximum allowed value
+	*	@returns {number}
+ 	*/
+	rollClamp(number, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER)
+	{
+		number = this.getNumber(number, true)
+		min = this.getNumber(min, true, Number.MIN_SAFE_INTEGER)
+		max = this.getNumber(max, true, Number.MAX_SAFE_INTEGER)
+
+		if (number < min) return max
+		if (number > max) return min
+		return number
+	}
+
+	/**
  	*	INclusive random number generator
 	*	@param {number} [min=Number.MIN_SAFE_INTEGER] The minimum allowed value
 	*	@param {number} [max=Number.MAX_SAFE_INTEGER] The maximum allowed value
