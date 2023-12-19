@@ -180,6 +180,17 @@ export class DOMBuilder
 	}
 
 	/**
+ 	*	Gets an attribute from an element
+	*	@param {string} attribute The attribute name
+	*	@returns {string}
+ 	*/
+	getAttribute(attribute)
+	{
+		const element = this.getStack().getLastElement()
+		return element.getAttribute(this.getHelper().getString(attribute))
+	}
+
+	/**
  	*	Adds a class to an element
 	*	@param {string} className The name of the class
  	*/
@@ -239,6 +250,16 @@ export class DOMBuilder
 			this.setProperty(property, properties[property])
 	}
 
+	/**
+ 	*	Gets a property from an element
+	*	@param {string} property The property to get
+	*	@returns {string}
+ 	*/
+	getProperty(property)
+	{
+		const element = this.getStack().getLastElement()
+		return element[property]
+	}
 
 	/**
  	*	Ends the current element
