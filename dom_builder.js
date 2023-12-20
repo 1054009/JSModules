@@ -206,7 +206,7 @@ export class DOMBuilder
  	*/
 	addClasses(classes)
 	{
-		if (!helper.isArray(classes))
+		if (!this.getHelper().isArray(classes))
 			throw new Error(`Invalid classes ${classes} given to 'addClasses'`)
 
 		for (const className of classes)
