@@ -560,6 +560,32 @@ export class Helper
 		return new URLSearchParams(url)
 	}
 
+	/**
+	* 	Recursively indexes an object's properties into an array with sub-properties being separated by an arrow (->)
+	*	@param {Map} map The map to index properties to
+	*	@param {any} property The base property
+	*	@param {any} value The property value
+	*/
+	indexProperties(map, property, value)
+	{
+		if (!this.isMap(map))
+			throw new Error(`Invalid map ${map} given to indexProperties`)
+
+		if (this.isPrimitive(value))
+		{
+			map.set(property, value)
+			return
+		}
+
+		if (value instanceof Object)
+		{
+			const subProperties = Object.getOwnPropertyNames(value)
+
+			for (const subProperty of subProperties)
+				this.indexProperties(map, `${property}->${subProperty}`, value[subProperty])
+		}
+	}
+
 	/*
 	*	Runs an event
 	*/
