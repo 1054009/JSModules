@@ -159,6 +159,16 @@ export class Helper
 	}
 
 	/**
+ 	*	Returns true if a value is a Symbol, false otherwise
+ 	*	@param {any} variable The value to test
+	*	@returns {boolean}
+ 	*/
+	isSymbol(variable)
+	{
+		return typeof(variable) == "symbol"
+	}
+
+	/**
  	*	Safely access a string data type
  	*	@param {any} variable The value to get as a string
 	*	@param {string} [fallback=""] The value that will be returned if converson fails
