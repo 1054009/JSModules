@@ -174,6 +174,17 @@ export class Helper
 	}
 
 	/**
+ 	*	Returns true if a value is a primitive data type, false otherwise
+ 	*	@param {any} variable The value to test
+	*	@returns {boolean}
+ 	*/
+	isPrimitive(variable)
+	{
+		if (variable === undefined || variable === null) return true
+		return this.isString(variable) || this.isNumber(variable) || this.isBoolean(variable) || this.isSymbol(variable)
+	}
+
+	/**
  	*	Safely access a string data type
  	*	@param {any} variable The value to get as a string
 	*	@param {string} [fallback=""] The value that will be returned if converson fails
