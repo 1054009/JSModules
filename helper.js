@@ -100,11 +100,16 @@ export class Helper
  	*	Returns true if a value is a number, false otherwise
  	*	@param {any} variable The value to test
 	*	@param {boolean} [noBoundsCheck=false] Whether or not to compare max and min safe integer
+	*	@param {boolean} [allowBigInt=true] Whether or not to allow BigInts to pass as numbers
 	*	@returns {boolean}
  	*/
-	isNumber(variable, noBoundsCheck = false)
+	isNumber(variable, noBoundsCheck = false, allowBigInt = true)
 	{
 		if (Number.isNaN(variable)) return false
+
+		if (allowBigInt)
+			if (!(variable instanceof BigInt) && typeof(variable) != "bigint") return false
+
 		if (!(variable instanceof Number) && typeof(variable) != "number") return false
 
 		if (!noBoundsCheck)
