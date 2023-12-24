@@ -107,8 +107,8 @@ export class Helper
 	{
 		if (Number.isNaN(variable)) return false
 
-		if (allowBigInt)
-			if (!(variable instanceof BigInt) && typeof(variable) != "bigint") return false
+		if (allowBigInt && ((variable instanceof BigInt) || typeof(variable) == "bigint"))
+			return true
 
 		if (!(variable instanceof Number) && typeof(variable) != "number") return false
 
