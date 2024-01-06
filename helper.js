@@ -185,6 +185,17 @@ export class Helper
 	}
 
 	/**
+	*	Returns true if a string is an IPv4 address, false otherwise
+	* 	@param {String} ip The IPv4 address to validate
+	* 	@returns {boolean}
+	*/
+	isIP(ip)
+	{
+		if (!this.isString(ip)) return false
+		return (/^(?:(?:^|\.)(?:2(?:5[0-5]|[0-4]\d)|1?\d?\d)){4}$/).test(ip)
+	}
+
+	/**
  	*	Safely access a string data type
  	*	@param {any} variable The value to get as a string
 	*	@param {string} [fallback=""] The value that will be returned if converson fails
