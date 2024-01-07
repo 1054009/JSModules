@@ -45,4 +45,23 @@ export class Enum
 		const translated = this.m_TranslateTable.get(value)
 		return translated || "INVALID_ENUM_VALUE"
 	}
+
+	/**
+ 	*	Attempts to lookup the numerical value of a string returned by translateValue. -1 if not found
+ 	*	@param {string} value The value to lookup
+	*	@returns {number}
+ 	*/
+ 	lookupValue(value)
+ 	{
+ 		value = this.getHelper().getString(value)
+ 		if (value.length < 1) return -1
+
+ 		for (const [ key, stored ] of this.m_TranslateTable.entries())
+ 		{
+ 			if (stored == value)
+ 				return key
+ 		}
+
+ 		return -1
+ 	}
 }
