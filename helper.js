@@ -189,7 +189,7 @@ export class Helper
 	* 	@param {String} ip The IPv4 address to validate
 	* 	@returns {boolean}
 	*/
-	isIP(ip)
+	isIPv4(ip)
 	{
 		if (!this.isString(ip)) return false
 		return (/^(?:(?:^|\.)(?:2(?:5[0-5]|[0-4]\d)|1?\d?\d)){4}$/).test(ip)
