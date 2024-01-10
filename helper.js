@@ -618,6 +618,15 @@ export class Helper
 		}
 	}
 
+	/**
+	* 	Returns the current UTC time in seconds
+	*	@returns {number}
+	*/
+	getTime()
+	{
+		return Math.floor(Date.now() / 1000)
+	}
+
 	/*
 	*	Runs an event
 	*/
