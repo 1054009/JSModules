@@ -620,11 +620,15 @@ export class Helper
 
 	/**
 	* 	Returns the current UTC time in seconds
+	*	@param {boolean} [noFloor=false] Whether or not to floor the time
 	*	@returns {number}
 	*/
-	getTime()
+	getTime(noFloor = false)
 	{
-		return Math.floor(Date.now() / 1000)
+		const seconds = Date.now() / 1000
+		if (noFloor) return seconds
+
+		return Math.floor(seconds)
 	}
 
 	/*
