@@ -651,6 +651,28 @@ export class Helper
 		}
 	}
 
+	/**
+	* 	Fetches a URL as JSON and runs a callback
+	*	@param {string} url The URL to fetch
+	*	@param {Function} callback The callback to be ran
+	*/
+	fetchJSON(url, callback)
+	{
+		if (!this.isValidURL(url)) return
+		if (!this.isFunction(callback)) return
+
+		fetch(url,
+		{
+			method: "GET"
+		}).then((response) =>
+		{
+			response.json()
+		}).then((response) =>
+		{
+			callback(response)
+		})
+	}
+
 	/*
 	*	Runs an event
 	*/
