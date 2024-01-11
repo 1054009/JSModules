@@ -673,6 +673,9 @@ export class Helper
 		}).then((response) =>
 		{
 			callback(response)
+		}).catch(() =>
+		{
+			callback(null)
 		})
 	}
 
