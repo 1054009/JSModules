@@ -666,7 +666,10 @@ export class Helper
 			method: "GET"
 		}).then((response) =>
 		{
-			response.json()
+			if (!response.ok)
+				return null
+
+			return response.json()
 		}).then((response) =>
 		{
 			callback(response)
