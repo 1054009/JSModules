@@ -631,6 +631,26 @@ export class Helper
 		return Math.floor(seconds)
 	}
 
+	/**
+	* 	Returns true if the provided string is a valid URL, false otherwise
+	*	@param {string} url The URL to check
+	*	@returns {boolean}
+	*/
+	isValidURL(url)
+	{
+		if (!this.isString(url))
+			return false
+
+		try
+		{
+			return Boolean(new URL(url))
+		}
+		catch (_)
+		{
+			return false
+		}
+	}
+
 	/*
 	*	Runs an event
 	*/
