@@ -693,7 +693,7 @@ export class Helper
 			target = target.replace('_', ' ')
 
 		const constructor = []
-		for (const section of lower.split(' '))
+		for (const section of target.split(' '))
 		{
 			const first = section.substring(0, 1).toUpperCase()
 			const rest = section.substring(1).toLowerCase()
