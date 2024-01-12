@@ -679,6 +679,31 @@ export class Helper
 		})
 	}
 
+	/**
+	* 	Converts a string to title case
+	*	@param {string} target The string to convert
+	*	@param {boolean} [noReplace=false] Set to false to stop underscores being interpreted as spaces
+	*	@returns {string}
+	*/
+	toTitleCase(target, noReplace = false)
+	{
+		if (!this.isString(target)) return ""
+
+		if (!noReplace)
+			target = target.replace('_', ' ')
+
+		const constructor = []
+		for (const section of lower.split(' '))
+		{
+			const first = section.substring(0, 1).toUpperCase()
+			const rest = section.substring(1).toLowerCase()
+
+			constructor.push(first + rest)
+		}
+
+		return constructor.join(' ')
+	}
+
 	/*
 	*	Runs an event
 	*/
