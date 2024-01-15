@@ -757,6 +757,7 @@ export class Helper
 
 		// Scope it
 		{
+			const storedName = name
 			const storedDelay = delay
 			const storedCallback = callback
 
@@ -764,7 +765,9 @@ export class Helper
 			adjustedCallback = () =>
 			{
 				storedCallback()
-				setTimeout(adjustedCallback, storedDelay) // Infinite loop every x seconds
+
+				const newID = setTimeout(adjustedCallback, storedDelay) // Infinite loop every x seconds
+				g_TimerTimeouts.set(storedName, newID)
 			}
 
 			adjustedCallback.m_fnCallback = storedCallback
