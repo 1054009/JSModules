@@ -753,7 +753,7 @@ export class Helper
 			throw new Error(`Bad callback ${callback} given to createTimer`)
 
 		// Remove the old one
-		destroyTimer(name)
+		this.destroyTimer(name)
 
 		// Scope it
 		{
