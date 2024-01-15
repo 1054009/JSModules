@@ -752,6 +752,9 @@ export class Helper
 		if (!this.isFunction(callback))
 			throw new Error(`Bad callback ${callback} given to createTimer`)
 
+		// Turn the delay into milliseconds for setTimeout
+		delay /= 1000
+
 		// Remove the old one
 		this.destroyTimer(name)
 
@@ -808,6 +811,8 @@ export class Helper
 
 		if (!this.isFunction(callback))
 			throw new Error(`Bad callback ${callback} given to createSimpleTimer`)
+
+		delay /= 1000
 
 		setTimeout(callback, delay)
 	}
