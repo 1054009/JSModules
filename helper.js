@@ -765,6 +765,7 @@ export class Helper
 			adjustedCallback = () =>
 			{
 				storedCallback()
+				if (!this.getTimerID(storedName)) return
 
 				const newID = setTimeout(adjustedCallback, storedDelay) // Infinite loop every x seconds
 				g_TimerTimeouts.set(storedName, newID)
