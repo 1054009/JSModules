@@ -1,4 +1,7 @@
-const g_EventList = new Map() // Global list of events, because strict mode sucks
+// Global lists, because strict mode sucks
+const g_TimerTimeouts = new Map()
+const g_TimerCallbacks = new Map()
+const g_EventList = new Map()
 
 /*
 *	Used to helper's hookEvent to store event information
@@ -702,6 +705,91 @@ export class Helper
 		}
 
 		return constructor.join(' ')
+	}
+
+	/**
+	* 	Gets the timer timeout ID from the given name, null if not found
+	*	@param {string} name The name of the timer
+	*/
+	getTimerID(name)
+	{
+		const timeoutID = g_TimerTimeouts.get(name)
+		if (!this.isNumber(timeoutID)) return null
+
+		return timeoutID
+	}
+
+	/**
+	* 	Gets the timer callback function from the given name, null if not found
+	*	@param {string} name The name of the timer
+	*/
+	getTimerCallback(name)
+	{
+		const timeoutID = getTimerID(name)
+		if (!this.isNumber(timeoutID)) return null
+
+		const callback = g_TimerCallbacks.get(timeoutID)
+		if (!this.isFunction(callback)) return null
+		if (!this.isFunction(callback.m_fnCallback)) return null
+
+		return callback.m_fnCallback
+	}
+
+	/**
+	* 	Creates a timer with the given name and delay
+	*	@param {string} name The name of the timer
+	*	@param {number} delay How much time, in seconds, there will be between each iteration
+	*	@param {Function} callback The function to run on an iteration
+	*/
+	createTimer(name, delay, callback)
+	{
+		if (!this.isString(name))
+			throw new Error(`Bad name ${name} given to createTimer`)
+
+		if (!this.isNumber(delay))
+			throw new Error(`Bad delay ${delay} given to createTimer`)
+
+		if (!this.isFunction(callback))
+			throw new Error(`Bad callback ${callback} given to createTimer`)
+
+		// Remove the old one
+		destroyTimer(name)
+
+		// Scope it
+		{
+			const storedDelay = delay
+			const storedCallback = callback
+
+			let adjustedCallback = null
+			adjustedCallback = () =>
+			{
+				storedCallback()
+				setTimeout(adjustedCallback, storedDelay) // Infinite loop every x seconds
+			}
+
+			adjustedCallback.m_fnCallback = storedCallback
+
+			// Index it
+			const id = setTimeout(adjustedCallback, delay)
+
+			g_TimerTimeouts.set(name, id)
+			g_TimerCallbacks.set(id, adjustedCallback)
+		}
+	}
+
+	/**
+	* 	Destroys the timer with the given name
+	*	@param {string} name The name of the timer
+	*/
+	destroyTimer(name)
+	{
+		const existingID = getTimerID(name)
+		if (!existingID) return
+
+		g_TimerTimeouts.delete(name)
+		g_TimerCallbacks.delete(existingID)
+
+		clearTimeout(existingID)
 	}
 
 	/*
