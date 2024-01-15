@@ -796,6 +796,22 @@ export class Helper
 		clearTimeout(existingID)
 	}
 
+	/**
+	* 	Creates a simple timer that runs once
+	*	@param {number} delay How many seconds to wait before running the callback
+	*	@param {Function} callback The callback to run
+	*/
+	createSimpleTimer(delay, callback)
+	{
+		if (!this.isNumber(delay))
+			throw new Error(`Bad delay ${delay} given to createSimpleTimer`)
+
+		if (!this.isFunction(callback))
+			throw new Error(`Bad callback ${callback} given to createSimpleTimer`)
+
+		setTimeout(callback, delay)
+	}
+
 	/*
 	*	Runs an event
 	*/
