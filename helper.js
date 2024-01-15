@@ -725,7 +725,7 @@ export class Helper
 	*/
 	getTimerCallback(name)
 	{
-		const timeoutID = getTimerID(name)
+		const timeoutID = this.getTimerID(name)
 		if (!this.isNumber(timeoutID)) return null
 
 		const callback = g_TimerCallbacks.get(timeoutID)
@@ -783,7 +783,7 @@ export class Helper
 	*/
 	destroyTimer(name)
 	{
-		const existingID = getTimerID(name)
+		const existingID = this.getTimerID(name)
 		if (!existingID) return
 
 		g_TimerTimeouts.delete(name)
