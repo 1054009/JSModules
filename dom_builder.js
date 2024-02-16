@@ -139,9 +139,9 @@ export class DOMBuilder
 	startPush(element)
 	{
 		if (this.getIsActive())
-			this.start(element)
-		else
 			this.push(element)
+		else
+			this.start(element)
 	}
 
 	/**
@@ -338,7 +338,7 @@ export class DOMBuilder
  	*/
 	getIsActive()
 	{
-		return this.getHelper().getBoolean(this.m_bActive, false)
+		return this.m_bActive
 	}
 
 	/**
