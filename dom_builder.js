@@ -225,15 +225,45 @@ export class DOMBuilder
 
 	/**
 	*	Sets the given property to the given value
-	*	@param {string} property The property to set
+	*	@param {string} property The property to set. Can be separated with periods for multiple indexes, such as "style.width"
 	*	@param {any} value The value to set the property to
 	*/
 	setProperty(property, value)
 	{
-		property = this.getHelper().getString(property)
-
+		const helper = this.getHelper()
 		const element = this.getStack().getLastElement()
-		element[property] = value
+
+		if (helper.isString(property) && property.includes('.'))
+		{
+			// Attempt to find the next to last value for period separated indexes
+			// Uses optional chaining logic, if an invalid property is come across then nothing will happen
+			const propertyKeys = property.split('.')
+			let currentBit = element[propertyKeys[0]]
+
+			if (!currentBit)
+				return // Bad starting place
+
+			for (let i = 1; i < (propertyKeys.length - 1); i++)
+			{
+				const nextProperty = propertyKeys[i]
+
+				const nextBit = currentBit[nextProperty]
+				if (!nextBit)
+					return // Hit an invalid property, bail
+
+				currentBit = nextBit
+			}
+
+			if (currentBit)
+			{
+				// If we have gotten to the end then we can set the final bit to whatever
+				const finalProperty = propertyKeys[propertyKeys.length - 1]
+				if (finalProperty)
+					currentBit[finalProperty] = value
+			}
+		}
+		else
+			element[property] = value
 	}
 
 	/**
