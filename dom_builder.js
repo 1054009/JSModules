@@ -102,7 +102,7 @@ export class DOMBuilder
 		if (!this.getIsActive())
 			throw new Error("Attempted to end builder when inactive")
 
-		if (this.getStack().getLastElement() == this.m_BaseElement)
+		if (this.getTop() == this.m_BaseElement)
 			this.getStack().pop()
 
 		const stackSize = this.getStack().getCount()
@@ -118,7 +118,7 @@ export class DOMBuilder
  	*/
 	push(element)
 	{
-		const parent = this.getStack().getLastElement()
+		const parent = this.getTop()
 		parent.appendChild(element)
 
 		this.getStack().push(element)
@@ -183,7 +183,7 @@ export class DOMBuilder
 	setAttribute(attribute, value)
 	{
 		const helper = this.getHelper()
-		const element = this.getStack().getLastElement()
+		const element = this.getTop()
 
 		attribute = helper.getString(attribute)
 		value = helper.getString(value)
@@ -212,7 +212,7 @@ export class DOMBuilder
  	*/
 	getAttribute(attribute)
 	{
-		const element = this.getStack().getLastElement()
+		const element = this.getTop()
 		return element.getAttribute(this.getHelper().getString(attribute))
 	}
 
@@ -222,7 +222,7 @@ export class DOMBuilder
  	*/
 	addClass(className)
 	{
-		const element = this.getStack().getLastElement()
+		const element = this.getTop()
 		element.classList.add(this.getHelper().getString(className))
 	}
 
@@ -245,7 +245,7 @@ export class DOMBuilder
  	*/
 	setID(id)
 	{
-		const element = this.getStack().getLastElement()
+		const element = this.getTop()
 		element.id = this.getHelper().getString(id)
 	}
 
@@ -257,7 +257,7 @@ export class DOMBuilder
 	setProperty(property, value)
 	{
 		const helper = this.getHelper()
-		const element = this.getStack().getLastElement()
+		const element = this.getTop()
 
 		if (helper.isString(property) && property.includes('.'))
 		{
@@ -313,7 +313,7 @@ export class DOMBuilder
  	*/
 	getProperty(property)
 	{
-		const element = this.getStack().getLastElement()
+		const element = this.getTop()
 		return element[property]
 	}
 
@@ -366,6 +366,15 @@ export class DOMBuilder
 	getBody()
 	{
 		return document.body
+	}
+
+	/**
+	* 	Returns the element at the top of the stack
+	*	@returns {Element}
+	*/
+	getTop()
+	{
+		return this.getStack().getLastElement()
 	}
 
 	/*
