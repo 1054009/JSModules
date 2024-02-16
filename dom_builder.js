@@ -73,6 +73,7 @@ export class DOMBuilder
 
 	/**
  	*	Starts a stack
+	*	@param {Element} parentElement The element the stack will start at
  	*/
 	start(parentElement)
 	{
