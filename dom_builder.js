@@ -158,6 +158,23 @@ export class DOMBuilder
 	}
 
 	/**
+	* 	Ensures an element is at the top of the stack
+	*	@param {Element} element The element wanted at the top
+	*	@returns {boolean} true if a new context was started, signaling that a pop or end is needed
+	*/
+	ensureTop(element)
+	{
+		if (!element)
+			return false
+
+		if (this.getTop() == element)
+			return false
+
+		this.startPush(element)
+		return true
+	}
+
+	/**
  	*	Starts a new element
 	*	@param {string} type The type of element
  	*/
