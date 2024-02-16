@@ -133,6 +133,31 @@ export class DOMBuilder
 	}
 
 	/**
+	* 	Use this if you are unsure if you should use start or push
+	*	@param {Element} element The base element
+	*/
+	startPush(element)
+	{
+		if (this.getIsActive())
+			this.start(element)
+		else
+			this.push(element)
+	}
+
+	/**
+	* 	Use this if you are unsure if you should use end or pop
+	*/
+	endPop()
+	{
+		const stack = this.getStack()
+
+		if (stack.getCount() == 1)
+			this.end()
+		else
+			this.pop()
+	}
+
+	/**
  	*	Starts a new element
 	*	@param {string} type The type of element
  	*/
