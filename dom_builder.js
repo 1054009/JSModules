@@ -66,7 +66,7 @@ export class DOMBuilder
 {
 	constructor()
 	{
-		const helper = Helper.assignToObject(this)
+		Helper.assignToObject(this)
 
 		this.m_Stack = new DOMBuilder__Stack()
 	}
