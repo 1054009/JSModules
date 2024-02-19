@@ -206,7 +206,7 @@ export class Helper
 	{
 		if (!this.isElement(variable)) return false
 
-		return Boolean(variable.parentNode) && Boolean(variable.offsetParent)
+		return Boolean(variable.parentNode)
 	}
 
 	/**
