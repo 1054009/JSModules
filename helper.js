@@ -188,6 +188,28 @@ export class Helper
 	}
 
 	/**
+	* 	Returns true if a value is a DOM Element, false otherwise
+	*	@param {any} variable The value to test
+	*	@returns {boolean}
+	*/
+	isElement(variable)
+	{
+		return variable instanceof Element
+	}
+
+	/**
+	* 	Returns true if a value is a valid DOM Element, false otherwise
+	*	@param {any} variable The value to test
+	*	@returns {boolean}
+	*/
+	isValidElement(variable)
+	{
+		if (!this.isElement(variable)) return false
+
+		return Boolean(variable.parentNode) && Boolean(variable.offsetParent)
+	}
+
+	/**
 	*	Returns true if a string is an IPv4 address, false otherwise
 	* 	@param {String} ip The IPv4 address to validate
 	* 	@returns {boolean}
