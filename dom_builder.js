@@ -267,8 +267,26 @@ export class DOMBuilder
 	}
 
 	/**
+	* 	Sets a key to a value on an object
+	*	@param {Object} object
+	*	@param {any} key
+	*	@param {any} value Use undefined to delete the property
+	*	@returns {Object} The passed in object
+	*/
+	setKeyValue(object, key, value)
+	{
+		if (!(object instanceof Object))
+			return object
+
+		if (value === undefined)
+			delete object[key]
+		else
+			object[key] = value
+	}
+
+	/**
 	*	Sets the given property to the given value
-	*	@param {string} property The property to set. Can be separated with periods for multiple indexes, such as "style.width"
+	*	@param {string} property The property to set. Can be separated with periods for multiple indexes, such as "style.width." Use undefined to delete/remove a property
 	*	@param {any} value The value to set the property to
 	*/
 	setProperty(property, value)
@@ -302,11 +320,11 @@ export class DOMBuilder
 				// If we have gotten to the end then we can set the final bit to whatever
 				const finalProperty = propertyKeys[propertyKeys.length - 1]
 				if (finalProperty)
-					currentBit[finalProperty] = value
+					this.setKeyValue(currentBit, finalProperty, value)
 			}
 		}
 		else
-			element[property] = value
+			this.setKeyValue(element, property, value)
 	}
 
 	/**
