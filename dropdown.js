@@ -6,20 +6,6 @@ const g_Dropdowns = new Array()
 
 /*
 *
-*	The main dropdown class
-*
-*/
-export class Dropdown
-{
-	constructor()
-	{
-		const helper = Helper.assignToObject(this)
-	}
-}
-
-
-/*
-*
 *	The manager for dropdowns
 *
 */
