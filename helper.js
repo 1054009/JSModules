@@ -932,9 +932,10 @@ export class Helper
 		{
 			callbackList = []
 			events.set(listener, callbackList)
-
-			listener.addEventListener(eventName, this.runEvent)
 		}
+
+		// Always add the event to ensure it's hooked properly
+		listener.addEventListener(eventName, this.runEvent)
 
 		const callbackData = new Helper__EventCallbackData(listener, eventName, permanent, callback)
 		callbackList.push(callbackData)
