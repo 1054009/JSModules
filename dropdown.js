@@ -61,6 +61,7 @@ export class DropdownManager
 			style.left = `${displayRect.x}px`
 			style.top = `${top}px`
 			style.minWidth = `${displayRect.width}px`
+			style.minHeight = `calc(${dropdown.children.length}em + 1px)`
 			style.maxHeight = `${window.innerHeight - top}px`
 
 			return true
