@@ -48,19 +48,17 @@ export class DropdownManager
 					return false
 			}
 
-			const displayRect = attachedElement.getBoundingClientRect()
-			if (!displayRect) // Should never happen
-				return true
+			const displayRect = helper.getElementRect(attachedElement)
 
 			const body = document.body
 			if (!body) // Should never happen
 				return true
 
-			const top = displayRect.top + displayRect.height
+			const top = displayRect.y + displayRect.height
 
 			const style = dropdown.style
 			style.position = "absolute"
-			style.left = `${displayRect.left}px`
+			style.left = `${displayRect.x}px`
 			style.top = `${top}px`
 			style.minWidth = `${displayRect.width}px`
 			style.maxHeight = `${body.clientHeight - top}px`
