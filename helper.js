@@ -331,6 +331,38 @@ export class Helper
 	}
 
 	/**
+	* 	Gets the bounding rect of an element and returns an object with `x`, `y`, `width` and `height` keys. Will be all 0's if the element is invalid.
+	*	@param {Element} element The element to get the rect of
+	*	@returns {Object}
+	*/
+	getElementRect(element)
+	{
+		const elementBounds = {
+			"x": 0,
+			"y": 0,
+			"width": 0,
+			"height": 0
+		}
+
+		if (!this.isValidElement(element))
+			return elementBounds
+
+		const rect = element.getBoundingClientRect()
+		if (!rect)
+			return elementBounds
+
+		// Try left, top, x and y
+		elementBounds.x = this.getNumber(rect.x, true, this.getNumber(rect.left, true, 0))
+		elementBounds.y = this.getNumber(rect.y, true, this.getNumber(rect.top, true, 0))
+
+		// Size
+		elementBounds.width = this.getNumber(rect.width, true)
+		elementBounds.height = this.getNumber(rect.height, true)
+
+		return elementBounds
+	}
+
+	/**
  	*	Clamp a number between minimum and maximum values
  	*	@param {number} number The value to clamp
 	*	@param {number} [min=Number.MIN_SAFE_INTEGER] The minimum allowed value
