@@ -907,4 +907,37 @@ export class Helper
 		const callbackData = new Helper__EventCallbackData(listener, eventName, permanent, callback)
 		callbackList.push(callbackData)
 	}
+
+	/**
+	* 	Same as hookEvent, but the callback is handled slightly differently. Only runs when the `event` and `event.target` are valid and the second argument is the element.
+	*	@param {Object} listener The object 'addEventListener' will be called on
+	*	@param {string} eventName The event name that will be passed to 'addEventListener'
+	*	@param {boolean} [permanent=false] If false, the event will be removed after it runs
+	*	@param {Function} callback The function that will be ran when the event is fired
+	*/
+	hookElementEvent(listener, eventName, permanent = false, callback)
+	{
+		if (!listener || !this.isFunction(listener.addEventListener))
+			throw new Error(`Invalid listener '${listener}' given to 'hookEvent'`)
+
+		eventName = this.getString(eventName)
+		permanent = this.getBoolean(permanent, true, false)
+
+		if (!this.isFunction(callback))
+			throw new Error(`Invalid callback '${callback}' given to 'hookEvent'`)
+
+		// Scope it out
+		{
+			const g_fnCallback = callback
+
+			const g_fnAdjustedCallback = (event) =>
+			{
+				if (!event || !event.target) return
+
+				return g_fnCallback(event, event.target)
+			}
+
+			this.hookEvent(listener, eventName, permanent, g_fnAdjustedCallback)
+		}
+	}
 }
