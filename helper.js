@@ -689,6 +689,34 @@ export class Helper
 	}
 
 	/**
+	* 	Safely calls a function and catches errors.
+	*	If the first return is true, all of the other returns are what the function returned.
+	*	If the first return is false, the second return is the error message.
+	*	@param {Function} callback The function to run
+	*	@param {rest} args The arguments to pass into the function
+	*	@returns {Array} An array containing all of the returned bits
+	*/
+	protectedCall(callback, ...args)
+	{
+		if (!this.isFunction(callback))
+			return [ false, `Got invalid function ${callback}` ]
+
+		try
+		{
+			const returned = callback(...args)
+
+			if (this.isArray(returned))
+				return [ true, ...returned ]
+			else
+				return [ true, returned ]
+		}
+		catch (error)
+		{
+			return [ false, error ]
+		}
+	}
+
+	/**
 	* 	Returns true if the provided string is a valid URL, false otherwise
 	*	@param {string} url The URL to check
 	*	@returns {boolean}
@@ -698,14 +726,12 @@ export class Helper
 		if (!this.isString(url))
 			return false
 
-		try
+		const [ success ] = this.protectedCall(() =>
 		{
-			return Boolean(new URL(url))
-		}
-		catch (_)
-		{
-			return false
-		}
+			return new URL(url)
+		})
+
+		return success
 	}
 
 	/**
