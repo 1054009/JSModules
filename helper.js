@@ -747,7 +747,7 @@ export class Helper
 		if (!this.isString(target)) return ""
 
 		if (!noReplace)
-			target = target.replace('_', ' ')
+			target = target.replaceAll('_', ' ')
 
 		const constructor = []
 		for (const section of target.split(' '))
