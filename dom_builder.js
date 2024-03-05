@@ -95,7 +95,7 @@ export class DOMBuilder
 	}
 
 	/**
- 	*	Starts the stack
+ 	*	Ends the stack
  	*/
 	end()
 	{
