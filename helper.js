@@ -448,6 +448,36 @@ export class Helper
 	}
 
 	/**
+	* 	Shuffles an array
+	*	@param {Array} target The array to shuffle
+	*	@param {boolean} [inPlace=false] Whether or not to shuffle the array in-place
+	*	@returns {Array} A new array if not in place, the target array otherwise
+	*/
+	shuffleArray(target, inPlace = false)
+	{
+		if (!this.isArray(target))
+			return target
+
+		inPlace = this.getBoolean(inPlace)
+
+		// Schwartzian Transform
+		if (inPlace)
+		{
+			target.forEach((value, index, array) => array[index] = [ value, Math.random() ])
+			target.sort((a, b) => a[1] - b[1])
+			target.forEach((block, index, array) => array[index] = block[0])
+
+			return target
+		}
+
+		const shuffled = target.map(value => [ value, Math.random() ])
+		shuffled.sort((a, b) => a[1] - b[1])
+		shuffled.forEach((block, index, array) => array[index] = block[0])
+
+		return shuffled
+	}
+
+	/**
  	*	Deep copies an array
 	*	@param {Array} target The array to be copied
 	*	@returns {Array}
