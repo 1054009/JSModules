@@ -927,6 +927,48 @@ export class Helper
 		setTimeout(callback, delay)
 	}
 
+	/**
+	* 	Loops over an array in steps
+	*	@param {Array} array The array to loop over
+	*	@param {number} step The amount of items to loop over per-iteration
+	*	@param {number} [delay=0.01] How long to wait, in seconds, between iterations
+	*	@param {Function} callback The callback to run on each iteration. Arguments are `index, value`
+	*/
+	stepLoop(array, step, delay = 0.01, callback)
+	{
+		if (!this.isFunction(callback))
+			throw new error(`Bad callback ${callback} given to stepLoop`)
+
+		if (!this.isArray(array))
+			throw new error(`Bad array ${array} given to stepLoop`)
+
+		step = this.getNumber(step)
+		delay = this.getNumber(delay, true)
+
+		if (step <= 0)
+			throw new error(`Bad step ${step} given to stepLoop`)
+
+		if (delay < 0)
+			throw new error(`Bad delay ${delay} given to stepLoop`)
+
+		// Actual loop
+		const TIMER_NAME = `stepLoop_${array}`
+		const maxIndex = array.length
+		let currentIndex = 0
+
+		this.createTimer(TIMER_NAME, delay, () =>
+		{
+			const startIndex = currentIndex
+			const endIndex = this.clamp(startIndex + step, null, maxIndex)
+
+			for (currentIndex = startIndex; currentIndex < endIndex; currentIndex++)
+				callback(currentIndex, array[currentIndex])
+
+			if (currentIndex >= maxIndex)
+				this.destroyTimer(TIMER_NAME)
+		})
+	}
+
 	/*
 	*	Runs an event
 	*/
