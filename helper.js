@@ -13,7 +13,7 @@ class Helper__EventCallbackData
 		const helper = Helper.assignToObject(this)
 
 		if (!listener || !helper.isFunction(listener.addEventListener))
-		throw new Error(`Invalid listener '${listener}' given to 'Helper__EventCallbackData'`)
+			throw new Error(`Invalid listener '${listener}' given to 'Helper__EventCallbackData'`)
 
 		eventName = helper.getString(eventName)
 		permanent = helper.getBoolean(permanent, true, false)
