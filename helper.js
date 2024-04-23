@@ -448,6 +448,21 @@ export class Helper
 	}
 
 	/**
+	* 	Removes something from an array
+	*	@param {Array} target The array to remove the item from
+	*	@param {Object} item The item to remove
+	*/
+	popFrom(target, item)
+	{
+		if (!this.isArray(target)) return
+
+		const index = target.indexOf(item)
+		if (index < 0) return
+
+		target.splice(index, 1)
+	}
+
+	/**
 	* 	Shuffles an array
 	*	@param {Array} target The array to shuffle
 	*	@param {boolean} [inPlace=false] Whether or not to shuffle the array in-place
